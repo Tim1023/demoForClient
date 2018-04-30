@@ -17,21 +17,22 @@
 
 /*}*/
 .navbar.navbar-transparent img {
-    margin-top: -18px;
+    margin-top: -25px;
 }
 
 .navbar img {
-    margin-top: -11px;
+    margin-top: -17px;
 }
 
 .navbar .navbar-nav .nav-item .nav-link {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 400;
 }
 
-.navbar .navbar-brand {
-    font-size: 18px;
-    font-weight: 500;
+.navbar .navbar-brand span{
+    font-size: 20px;
+    font-weight: 400;
+    vertical-align: super;
 }
 
 [class*="features-"], [class*="team-"], [class*="projects-"], [class*="pricing-"], [class*="testimonials-"], [class*="contactus-"] {
@@ -90,10 +91,6 @@
 
 .card .card-header-primary, .card.bg-primary, .card.card-rotate.bg-primary .front, .card.card-rotate.bg-primary .back {
     background: linear-gradient(60deg, #adbe4f, #7e8e29);
-}
-
-.navbar .navbar-brand {
-    font-size: 25px;
 }
 
 .navbar.navbar-transparent {
@@ -180,4 +177,12 @@
     font-weight: 700;
     font-size: 2.25rem;
     line-height: 1.5em;
+}
+
+.mt--much {
+    margin-top: -105px;
+}
+
+p {
+    font-size:inherit;
 }
