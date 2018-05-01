@@ -118,7 +118,8 @@
                                             </a>
                                         </div>
                                         <div class="card-body">
-                                            <h6 class="card-category {{ loop.index == 1?'text-info':loop.index == 2?'text-success':'text-danger' }}"><i
+                                            <h6 class="card-category {{ loop.index == 1?'text-info':loop.index == 2?'text-success':'text-danger' }}">
+                                                <i
                                                         class="material-icons">{{ loop.index == 2?'business_center':'trending_up' }}</i>
                                                 {{ block.category.one }}
                                             </h6>
@@ -230,5 +231,42 @@
 
     </div>
 
+    {% macro errorList(errors) %}
+        {% if errors %}
+            <ul class="errors">
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endmacro %}
 
+    {% from _self import errorList %}
+    {% if craft.app.session.hasFlash('notice') %}
+        <p class="message notice">{{ craft.app.session.getFlash('notice') }}</p>
+    {% elseif craft.app.session.hasFlash('error') %}
+        <p class="message error">{{ craft.app.session.getFlash('error') }}</p>
+    {% endif %}
+    <form method="post" action="" accept-charset="UTF-8">
+        {{ csrfInput() }}
+        <input type="hidden" name="action" value="contact-form/send">
+
+        <h3><label for="from-name">Your Name</label></h3>
+        <input id="from-name" type="text" name="fromName" value="{{ message.fromName ?? '' }}">
+        {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
+
+        <h3><label for="from-email">Your Email</label></h3>
+        <input id="from-email" type="email" name="fromEmail" value="{{ message.fromEmail ?? '' }}">
+        {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
+
+        <h3><label for="subject">Subject</label></h3>
+        <input id="subject" type="text" name="subject" value="{{ message.subject ?? '' }}">
+        {{ message is defined and message ? errorList(message.getErrors('subject')) }}
+
+        <h3><label for="message">Message</label></h3>
+        <textarea rows="10" cols="40" id="message" name="message">{{ message.message ?? '' }}</textarea>
+        {{ message is defined and message ? errorList(message.getErrors('message')) }}
+
+        <input type="submit" value="Send">
+    </form>
 {% endblock %}

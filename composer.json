@@ -21,9 +21,11 @@
   "require": {
     "craftcms/cms": "3.0.4",
     "vlucas/phpdotenv": "^2.4.0",
-    "enupal/translate": "1.0.5",
     "charliedev/advanced-url-field": "1.0.0",
-    "craftcms/ckeditor": "1.0.0-beta.2"
+    "craftcms/ckeditor": "1.0.0-beta.2",
+    "craftcms/contact-form": "^2.1",
+    "craftcms/mailgun": "1.2.0",
+    "lukeyouell/craft-mailgunevents": "1.0.1"
   },
   "autoload": {
     "psr-4": {
