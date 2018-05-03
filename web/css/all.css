@@ -219,3 +219,78 @@ p {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.contacts-blocks {
+    text-align: center;
+}
+
+.contacts-blocks h1 {
+    font-size: 36px;
+    font-weight: 500;
+    color: #374d5c;
+    text-transform: uppercase;
+}
+
+.contacts-blocks section {
+    width: 340px;
+    padding-left: 40px;
+    margin-top: 60px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+    position: relative;
+    text-align: left;
+}
+
+.contacts-blocks section:nth-child(2n) {
+    margin-left: 95px;
+}
+
+.contacts-blocks section img {
+    position: absolute;
+    width: 28px;
+    left: 2px;
+}
+
+.contacts-blocks section label {
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.contacts-blocks section p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #374d5c;
+    line-height: 24px;
+    margin: 0;
+}
+
+.contacts-blocks section .email, .contacts-blocks.content section .phone {
+    font-size: 16px;
+    font-weight: 300;
+    color: #374d5c;
+    line-height: 24px;
+    display: block;
+}
+
+.contacts-blocks section .email:hover, .contacts-blocks.content section .phone:hover {
+    color: #adbe4f;
+}
+
+.contact-us .contact-content {
+    padding-bottom: 80px;
+}
+@media screen and (max-width: 868px) {
+    .contacts-blocks section:nth-child(2n) {
+        margin-left: 0;
+    }
+
+}
+@media screen and (max-width: 425px) {
+    .contacts-blocks section{
+        width: 100%;
+    }
+}

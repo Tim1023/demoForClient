@@ -1,0 +1,68 @@
+{% extends "_layout_cn" %}
+{% block main %}
+    <!--   MAIN block   -->
+    <style>
+        .navbar.navbar-transparent {
+            background-color: #000000c7 !important;
+        }
+    </style>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXvcJTNF8JxivfpYOVikKrg8Qi5UzY_O4&callback=initMap">
+    </script>
+    <script>
+        function initMap() {
+            var uluru = {lat: -36.8433459, lng: 174.7629848};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+        }
+    </script>
+    <div class="contact-us">
+        <div id="contactUsMap">
+            <div id="map" class="big-map"></div>
+
+        </div>
+        <div class="main main-raised">
+            <div class="contact-content">
+                <div class="container">
+                    <div class="content contacts-blocks">
+
+                        <h2 class="title mb-0">CONTACTS AND OFFICE LOCATIONS</h2>
+                        {% for block in entry.office.all() %}
+
+                            <section><img src="{{ block.flag.one.url }}" class="fr-fic fr-dii">
+                                <label>{{ block.country }}</label>
+
+                                <p>{{ block.addressOne }}
+                                    <br>{{ block.addressTwo }}
+                                    <br>{{ block.addressThree }}
+                                </p>
+                                <a class="phone"
+                                   href="tel:{{ block.phone }}">{{ block.phone }}
+                                </a>
+                                <a class="email" href="mailto:{{ block.email }}">{{ block.email }}
+                                </a>
+                            </section>
+                        {% endfor %}
+                        {% if entry.office.all()|length % 2 > 0 %}
+                            <section>
+                            </section>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+
+
+            {% if craft.app.language == 'en' %}
+                {% include "_form_en" %}
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

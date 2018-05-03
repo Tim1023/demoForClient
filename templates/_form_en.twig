@@ -1,0 +1,108 @@
+{% for block in craft.entries.section('contactUs').one().office.all() %}
+    {% if block.isPrimary %}
+        <div class="contactus-1 section-image"
+             style="background-image: url('https://images.pexels.com/photos/531360/pexels-photo-531360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <h2 class="title">Get in Touch</h2>
+                        <h5 class="description">You need more information? Check what other persons are
+                            saying about
+                            our
+                            product. They are very happy with their purchase.
+                        </h5>
+                        <div class="info info-horizontal">
+                            <div class="icon icon-primary">
+                                <i class="material-icons">pin_drop</i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">Find us at the office</h4>
+                                <p> {{  block.addressOne }}
+                                    <br>{{ block.addressTwo }}
+                                    <br> {{ block.addressThree }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="info info-horizontal">
+                            <div class="icon icon-primary">
+                                <i class="material-icons">phone</i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">Give us a ring
+                                </h4>
+                                <p> {{ block.person }}
+                                    <br> {{ block.phone }}
+                                    <br> Mon - Fri, 8:00-22:00
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 ml-auto">
+                        <div class="card card-contact">
+                            <form id="contact-form" method="post" action="" accept-charset="UTF-8">
+                                {{ csrfInput() }}
+                                <input type="hidden" name="action" value="contact-form/send">
+                                <div class="card-header card-header-raised card-header-primary text-center">
+                                    <h4 class="card-title">Contact Us</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group label-floating is-empty bmd-form-group">
+                                                <label class="bmd-label-floating">Family name</label>
+                                                <input type="text" name="message[FamilyName]"
+                                                       class="form-control"
+                                                       value="">
+                                                <span class="material-input"></span>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group label-floating is-empty bmd-form-group">
+                                                <label class="bmd-label-floating">First name</label>
+                                                <input type="text" name="message[FirstName]"
+                                                       class="form-control"
+                                                       value="">
+                                                <span class="material-input"></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group label-floating is-empty bmd-form-group">
+                                        <label class="bmd-label-floating">Email address</label>
+                                        <input type="email" name="fromEmail" class="form-control"
+                                               value="{{ message.fromEmail ?? '' }}">
+                                        <span class="material-input"></span>
+
+                                    </div>
+                                    <div class="form-group label-floating is-empty bmd-form-group">
+                                        <label for="exampleMessage1" class="bmd-label-floating">Your
+                                            Message</label>
+                                        <textarea name="message[body]" class="form-control"
+                                                  id="exampleMessage1"
+                                                  rows="6"></textarea>
+                                        <span class="material-input"></span>
+
+                                    </div>
+                                </div>
+                                <div class="card-footer justify-content-between">
+                                    {#<div class="form-check">#}
+                                    {#<label class="form-check-label">#}
+                                    {#<input class="form-check-input" type="checkbox" value=""> I'm not a robot#}
+                                    {#<span class="form-check-sign">#}
+                                    {#<span class="check"></span>#}
+                                    {#</span>#}
+                                    {#</label>#}
+                                    {#</div>#}
+                                    <button value="Send" type="submit" class="btn btn-green pull-right">SEND
+                                        MESSAGE
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
