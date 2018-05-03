@@ -1,0 +1,48 @@
+{% extends "_layout" %}
+{% block main %}
+    <!--   MAIN block   -->
+    <div class="about-us">
+        <div class="page-header header-filter header-small" data-parallax="true"
+             style="background-image: url({{ entry.topImage.one.url }}); transform: translate3d(0px, 27px, 0px);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 ml-auto mr-auto text-center">
+                        <h1 class="title">{{ entry.title }}</h1>
+                        <h4>{{ entry.descriptionSingle }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main main-raised post post-about">
+            <div class="container">
+                <div class="about-description text-left">
+                    <div class="row">
+                        {% for block in entry.block.all() %}
+                        <div class="col-md-10 ml-auto mr-auto">
+                            <h4 class="title mt-0">{{ block.head }}</h4>
+
+                            <p>
+                               {{ block.paragraph }}
+                            </p>
+
+                        </div>
+                      {% endfor %}
+                        <div class="col-md-10 ml-auto mr-auto about-li">
+                            <h4 class="title mt-0 ">Service</h4>
+                            <ul>
+                                {% for listItem in entry.listItem.all() %}
+
+                                <li><b>{{ listItem.head }}</b>：{{ listItem.paragraph }}
+                                </li>
+                               {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="about-team-image" style="background-image: url({{ entry.image.one.url }});">
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -29,7 +29,7 @@
     font-weight: 400;
 }
 
-.navbar .navbar-brand span{
+.navbar .navbar-brand span {
     font-size: 20px;
     font-weight: 400;
     vertical-align: super;
@@ -185,5 +185,37 @@
 }
 
 p {
-    font-size:inherit;
+    font-size: inherit;
+}
+
+.about-us {
+    margin-top: -27px;
+}
+
+.about-us .post.post-about p, .about-us li {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.about-us h4 {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.about-us ul li:before {
+    margin-top: 8px;
+    position: absolute;
+    content: '';
+    width: 6px;
+    height: 6px;
+    left: 37px;
+    background-color: #adbe4f;
+}
+
+.about-team-image {
+    margin-top: 50px;
+    height: 280px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
