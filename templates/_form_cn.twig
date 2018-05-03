@@ -5,18 +5,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-5">
-                        <h2 class="title">Get in Touch</h2>
-                        <h5 class="description">You need more information? Check what other persons are
-                            saying about
-                            our
-                            product. They are very happy with their purchase.
+                        <h2 class="title">联系我们</h2>
+                        <h5 class="description">欢迎随时以电话或电邮联络我们，体验专为您而设的贴心服务
                         </h5>
                         <div class="info info-horizontal">
                             <div class="icon icon-primary">
                                 <i class="material-icons">pin_drop</i>
                             </div>
                             <div class="description">
-                                <h4 class="info-title">Find us at the office</h4>
+                                <h4 class="info-title">公司地址</h4>
                                 <p> {{  block.addressOne }}
                                     <br>{{ block.addressTwo }}
                                     <br> {{ block.addressThree }}
@@ -28,11 +25,11 @@
                                 <i class="material-icons">phone</i>
                             </div>
                             <div class="description">
-                                <h4 class="info-title">Give us a ring
+                                <h4 class="info-title">电话
                                 </h4>
                                 <p> {{ block.person }}
                                     <br> {{ block.phone }}
-                                    <br> {{ block.workingTime }}
+                                    <br>{{ block.workingTime }}
                                 </p>
                             </div>
                         </div>
@@ -43,13 +40,13 @@
                                 {{ csrfInput() }}
                                 <input type="hidden" name="action" value="contact-form/send">
                                 <div class="card-header card-header-raised card-header-primary text-center">
-                                    <h4 class="card-title">Contact Us</h4>
+                                    <h4 class="card-title">联系我们</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group label-floating is-empty bmd-form-group">
-                                                <label class="bmd-label-floating">Family name</label>
+                                                <label class="bmd-label-floating">姓</label>
                                                 <input type="text" name="message[FamilyName]"
                                                        class="form-control"
                                                        value="">
@@ -59,7 +56,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group label-floating is-empty bmd-form-group">
-                                                <label class="bmd-label-floating">First name</label>
+                                                <label class="bmd-label-floating">名</label>
                                                 <input type="text" name="message[FirstName]"
                                                        class="form-control"
                                                        value="">
@@ -69,15 +66,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group label-floating is-empty bmd-form-group">
-                                        <label class="bmd-label-floating">Email address</label>
+                                        <label class="bmd-label-floating">电子信箱</label>
                                         <input type="email" name="fromEmail" class="form-control"
                                                value="{{ message.fromEmail ?? '' }}">
                                         <span class="material-input"></span>
 
                                     </div>
                                     <div class="form-group label-floating is-empty bmd-form-group">
-                                        <label for="exampleMessage1" class="bmd-label-floating">Your
-                                            Message</label>
+                                        <label for="exampleMessage1" class="bmd-label-floating">信息</label>
                                         <textarea name="message[body]" class="form-control"
                                                   id="exampleMessage1"
                                                   rows="6"></textarea>
@@ -94,8 +90,7 @@
                                     {#</span>#}
                                     {#</label>#}
                                     {#</div>#}
-                                    <button value="Send" type="submit" class="btn btn-green pull-right">SEND
-                                        MESSAGE
+                                    <button value="Send" type="submit" class="btn btn-green pull-right">发送
                                     </button>
                                 </div>
                             </form>
