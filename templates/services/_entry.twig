@@ -20,11 +20,10 @@
                 </div>
                 <div class="row">
 
-                    {#LICENSING#}
 
-                    {% if entry.title == 'Licensing' and craft.entries.section('licensing').all() %}
+                    {% if craft.entries.section(entry.slug|lower).all() %}
                         {% set featureBlocks = [] %}
-                        {% for block in craft.entries.section('licensing').all() %}
+                        {% for block in craft.entries.section(entry.slug|lower).all() %}
                             {% if block.isFeature %}
                                 {% set featureBlocks = featureBlocks|merge([block]) %}
                             {% endif %}
@@ -67,105 +66,15 @@
                             {% endif %}
                         {% endfor %}
 
-                        {#BLCOK CHAIN#}
 
-                    {% elseif entry.title == 'Block Chain' and craft.entries.section('blockChain').all() %}
-                        {% set featureBlocks = [] %}
-                        {% for block in craft.entries.section('blockChain').all() %}
-                            {% if block.isFeature %}
-                                {% set featureBlocks = featureBlocks|merge([block]) %}
-                            {% endif %}
-                        {% endfor %}
-                        {% for block in featureBlocks %}
-                            {% if loop.last and loop.index % 2 != 0 %}
-                                <div class="col-md-12">
-                                    <div class="card card-raised card-background"
-                                         style="background-image: url('{{ block.image.one.url }}')">
-                                        <div class="card-body">
-                                            <h6 class="card-category text-info">{{ block.area }}</h6>
-                                            <h3 class="card-title">{{ block.title }}</h3>
-                                            <p class="card-description">
-                                                {{ block.descriptionSingle }}
-                                            </p>
-                                            <a href="{{ block.url }}" class="btn btn-green btn-round">
-                                                <i class="material-icons">subject</i> Read More
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% else %}
-                                <div class="col-md-6">
-                                    <div class="card card-raised card-background"
-                                         style="background-image: url('{{ block.image.one.url }}')">
-                                        <div class="card-body">
-                                            <h6 class="card-category text-info">{{ block.area }}</h6>
-                                            <a href="{{ block.url }}">
-                                                <h3 class="card-title">{{ block.title }}</h3>
-                                            </a>
-                                            <p class="card-description">
-                                                {{ block.descriptionSingle }}
-                                            </p>
-                                            <a href="{{ block.url }}" class="btn btn-green btn-round">
-                                                <i class="material-icons">format_align_left</i> Read More
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
 
-                        {#COMPANIES#}
-                    {% elseif entry.title == 'Companies' and craft.entries.section('companies').all() %}
-                        {% set featureBlocks = [] %}
-                        {% for block in craft.entries.section('companies').all() %}
-                            {% if block.isFeature %}
-                                {% set featureBlocks = featureBlocks|merge([block]) %}
-                            {% endif %}
-                        {% endfor %}
-                        {% for block in featureBlocks %}
-                            {% if loop.last and loop.index % 2 != 0 %}
-                                <div class="col-md-12">
-                                    <div class="card card-raised card-background"
-                                         style="background-image: url('{{ block.image.one.url }}')">
-                                        <div class="card-body">
-                                            <h6 class="card-category text-info">{{ block.area }}</h6>
-                                            <h3 class="card-title">{{ block.title }}</h3>
-                                            <p class="card-description">
-                                                {{ block.descriptionSingle }}
-                                            </p>
-                                            <a href="{{ block.url }}" class="btn btn-green btn-round">
-                                                <i class="material-icons">subject</i> Read More
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% else %}
-                                <div class="col-md-6">
-                                    <div class="card card-raised card-background"
-                                         style="background-image: url('{{ block.image.one.url }}')">
-                                        <div class="card-body">
-                                            <h6 class="card-category text-info">{{ block.area }}</h6>
-                                            <a href="{{ block.url }}">
-                                                <h3 class="card-title">{{ block.title }}</h3>
-                                            </a>
-                                            <p class="card-description">
-                                                {{ block.descriptionSingle }}
-                                            </p>
-                                            <a href="{{ block.url }}" class="btn btn-green btn-round">
-                                                <i class="material-icons">format_align_left</i> Read More
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
                     {% endif %}
 
                 </div>
             </div>
 
             {#START#}
-
+            {% if featureBlocks|length != craft.entries.section(entry.slug|lower)|length %}
             <div class="section mt--much pb-0">
                 <h3 class="title text-center">OTHER SERVICE</h3>
                 <br>
@@ -276,6 +185,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
             {#END#}
         </div>
 
