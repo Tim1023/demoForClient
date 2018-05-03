@@ -43,6 +43,9 @@
             </div>
             <div class="about-team-image" style="background-image: url({{ entry.image.one.url }});">
             </div>
+            {% if craft.app.language == 'en' %}
+                {% include "_contact_en" %}
+            {% endif %}
         </div>
     </div>
 {% endblock %}
