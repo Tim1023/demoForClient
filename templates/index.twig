@@ -141,6 +141,25 @@
             </div>
         </div>
         {% endif %}
+
+        {#CONTACT#}
+        {#{% macro errorList(errors) %}#}
+            {#{% if errors %}#}
+                {#<ul class="errors">#}
+                    {#{% for error in errors %}#}
+                        {#<li>{{ error }}</li>#}
+                    {#{% endfor %}#}
+                {#</ul>#}
+            {#{% endif %}#}
+        {#{% endmacro %}#}
+
+        {#{% from _self import errorList %}#}
+        {#{% if craft.app.session.hasFlash('notice') %}#}
+            {#<p class="message notice">{{ craft.app.session.getFlash('notice') }}</p>#}
+        {#{% elseif craft.app.session.hasFlash('error') %}#}
+            {#<p class="message error">{{ craft.app.session.getFlash('error') }}</p>#}
+        {#{% endif %}#}
+
         <div class="contactus-1 section-image"
              style="background-image: url('https://images.pexels.com/photos/531360/pexels-photo-531360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') ">
             <div class="container">
@@ -178,7 +197,9 @@
                     </div>
                     <div class="col-md-5 ml-auto">
                         <div class="card card-contact">
-                            <form id="contact-form" method="post">
+                            <form id="contact-form" method="post" action="" accept-charset="UTF-8">
+                                {{ csrfInput() }}
+                                <input type="hidden" name="action" value="contact-form/send">
                                 <div class="card-header card-header-raised card-header-primary text-center">
                                     <h4 class="card-title">Contact Us</h4>
                                 </div>
@@ -187,40 +208,47 @@
                                         <div class="col-md-6">
                                             <div class="form-group label-floating is-empty bmd-form-group">
                                                 <label class="bmd-label-floating">Family name</label>
-                                                <input type="text" name="name" class="form-control">
+                                                <input type="text" name="message[FamilyName]" class="form-control"
+                                                       value="">
                                                 <span class="material-input"></span>
                                             </div>
+
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group label-floating is-empty bmd-form-group">
                                                 <label class="bmd-label-floating">First name</label>
-                                                <input type="text" name="name" class="form-control">
+                                                <input type="text" name="message[FirstName]" class="form-control"
+                                                       value="">
                                                 <span class="material-input"></span>
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="form-group label-floating is-empty bmd-form-group">
                                         <label class="bmd-label-floating">Email address</label>
-                                        <input type="email" name="email" class="form-control">
+                                        <input type="email" name="fromEmail" class="form-control"
+                                               value="{{ message.fromEmail ?? '' }}">
                                         <span class="material-input"></span>
+
                                     </div>
                                     <div class="form-group label-floating is-empty bmd-form-group">
                                         <label for="exampleMessage1" class="bmd-label-floating">Your Message</label>
-                                        <textarea name="message" class="form-control" id="exampleMessage1"
+                                        <textarea name="message[body]" class="form-control" id="exampleMessage1"
                                                   rows="6"></textarea>
                                         <span class="material-input"></span>
+
                                     </div>
                                 </div>
                                 <div class="card-footer justify-content-between">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" value=""> I'm not a robot
-                                            <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                        </label>
-                                    </div>
-                                    <button type="submit" class="btn btn-green pull-right">SEND MESSAGE</button>
+                                    {#<div class="form-check">#}
+                                        {#<label class="form-check-label">#}
+                                            {#<input class="form-check-input" type="checkbox" value=""> I'm not a robot#}
+                                            {#<span class="form-check-sign">#}
+                                                    {#<span class="check"></span>#}
+                                                {#</span>#}
+                                        {#</label>#}
+                                    {#</div>#}
+                                    <button  value="Send" type="submit" class="btn btn-green pull-right">SEND MESSAGE</button>
                                 </div>
                             </form>
                         </div>
@@ -231,42 +259,27 @@
 
     </div>
 
-    {% macro errorList(errors) %}
-        {% if errors %}
-            <ul class="errors">
-                {% for error in errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endmacro %}
 
-    {% from _self import errorList %}
-    {% if craft.app.session.hasFlash('notice') %}
-        <p class="message notice">{{ craft.app.session.getFlash('notice') }}</p>
-    {% elseif craft.app.session.hasFlash('error') %}
-        <p class="message error">{{ craft.app.session.getFlash('error') }}</p>
-    {% endif %}
-    <form method="post" action="" accept-charset="UTF-8">
-        {{ csrfInput() }}
-        <input type="hidden" name="action" value="contact-form/send">
+    {#<form method="post" action="" accept-charset="UTF-8">#}
+        {#{{ csrfInput() }}#}
+        {#<input type="hidden" name="action" value="contact-form/send">#}
 
-        <h3><label for="from-name">Your Name</label></h3>
-        <input id="from-name" type="text" name="fromName" value="{{ message.fromName ?? '' }}">
-        {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
+        {#<h3><label for="from-name">Your Name</label></h3>#}
+        {#<input id="from-name" type="text" name="fromName" value="{{ message.fromName ?? '' }}">#}
+        {#{{ message is defined and message ? errorList(message.getErrors('fromName')) }}#}
 
-        <h3><label for="from-email">Your Email</label></h3>
-        <input id="from-email" type="email" name="fromEmail" value="{{ message.fromEmail ?? '' }}">
-        {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
+        {#<h3><label for="from-email">Your Email</label></h3>#}
+        {#<input id="from-email" type="email" name="fromEmail" value="{{ message.fromEmail ?? '' }}">#}
+        {#{{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}#}
 
-        <h3><label for="subject">Subject</label></h3>
-        <input id="subject" type="text" name="subject" value="{{ message.subject ?? '' }}">
-        {{ message is defined and message ? errorList(message.getErrors('subject')) }}
+        {#<h3><label for="subject">Subject</label></h3>#}
+        {#<input id="subject" type="text" name="subject" value="{{ message.subject ?? '' }}">#}
+        {#{{ message is defined and message ? errorList(message.getErrors('subject')) }}#}
 
-        <h3><label for="message">Message</label></h3>
-        <textarea rows="10" cols="40" id="message" name="message">{{ message.message ?? '' }}</textarea>
-        {{ message is defined and message ? errorList(message.getErrors('message')) }}
+        {#<h3><label for="message">Message</label></h3>#}
+        {#<textarea rows="10" cols="40" id="message" name="message">{{ message.message ?? '' }}</textarea>#}
+        {#{{ message is defined and message ? errorList(message.getErrors('message')) }}#}
 
-        <input type="submit" value="Send">
-    </form>
+        {#<input type="submit" value="Send">#}
+    {#</form>#}
 {% endblock %}
