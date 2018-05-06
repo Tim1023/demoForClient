@@ -1,3 +1,168 @@
 {% extends "_layout_cn" %} {% block main %}
 
+    <div class="page-header header-filter header-small" data-parallax="true"
+         style="background-image: url('/img/bg10.jpg'); transform: translate3d(0px, 0px, 0px);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h2 class="title">A Place for Entrepreneurs to Share and Discover New Stories</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main main-raised">
+        <div class="container">
+            <div class="section pb-0">
+                <div class="row">
+                    <div class="col-md-10 ml-auto mr-auto text-center">
+                        <ul class="nav nav-pills nav-pills-primary ml-auto mr-auto news-nav">
+                            <li class="nav-item">
+                                <a class="nav-link {{ craft.request.getQueryStringWithoutPath() =='all' or craft.request.getQueryStringWithoutPath() ==''?'active':'' }}"
+                                   href="{{ craft.request.getUrl() }}?all">全部</a>
+                            </li>
+                            {% set newsCategorires = [] %}
+
+                            {% for block in craft.entries.section('news').all() %}
+                                {% set newsCategorires = newsCategorires|merge([block.category.one])|unique %}
+                            {% endfor %}
+                            {% for category in newsCategorires %}
+                                <li class="nav-item">
+                                    <a class="nav-link {{ craft.request.getQueryStringWithoutPath() == category.slug?'active':'' }}"
+                                       href="{{ craft.request.getUrl() }}?{{ category.slug }}">{{ category }}</a>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+                        <div class="tab-content tab-space">
+                            <div class="tab-pane {{ craft.request.getQueryStringWithoutPath() =='all' or craft.request.getQueryStringWithoutPath() ==''?'active':'' }}"
+                                 id="all">
+
+                                <div class="row">
+
+                                    {% paginate craft.entries.section('news').limit(18) as pageInfo, pageEntries %}
+
+                                    {% for block in pageEntries %}
+
+                                        <div class="col-md-4">
+                                            <div class="card card-plain card-blog m-0">
+                                                <a href="{{ block.url }}">
+                                                    <div class="card-header card-header-image">
+                                                        <img class="img img-raised" src='{{ block.image.one.url }}'>
+                                                        <div class="colored-shadow"
+                                                             style="background-image: url('{{ block.image.one.url }}'); opacity: 1;"></div>
+                                                    </div>
+                                                </a>
+
+                                                <div class="card-body">
+                                                    <h6 class="card-category {{ block.category.one == '行业新闻'?'text-info':'text-success' }}">{{ block.category.one }}</h6>
+                                                    <h4 class="card-title">
+                                                        <a href="{{ block.url }}">{{ block.title }}</a>
+                                                    </h4>
+                                                    <p class="card-description">
+                                                        {{ block.description }}
+                                                        <a href="{{ block.url }}"> 阅读更多 </a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <nav aria-label="...">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item {{ pageInfo.prevUrl? '':'disabled' }}">
+                                            <a class="page-link" href="{{ pageInfo.prevUrl }}"
+                                               tabindex="-1">前页</a>
+                                        </li>
+                                        {% for page, url in pageInfo.getPrevUrls(5) %}
+                                            <li class="page-item"><a class="page-link" href="{{ url }}">{{ page }}</a>
+                                            </li>
+                                        {% endfor %}
+                                        <li class="page-item active">
+                                            <a class="page-link" href="#">{{ pageInfo.currentPage }} <span
+                                                        class="sr-only">(current)</span></a>
+                                        </li>
+                                        {% for page, url in pageInfo.getNextUrls(5) %}
+                                            <li class="page-item"><a class="page-link" href="{{ url }}">{{ page }}</a>
+                                            </li>
+                                        {% endfor %}
+                                        <li class="page-item {{ pageInfo.nextUrl? '':'disabled' }}">
+                                            <a class="page-link" href="{{ pageInfo.nextUrl }}">后页</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            {% for category in newsCategorires %}
+                                <div class="tab-pane {{ craft.request.getQueryStringWithoutPath() ==category.slug?'active':'' }}"
+                                     id="{{ category.slug }}">
+                                    <div class="row">
+                                        {% set tag = craft.tags.group('category').slug(category.slug).first() %}
+
+                                        {% paginate craft.entries.section('news').relatedTo(tag).limit(18) as pageInfo, pageEntries %}
+
+                                        {% for block in pageEntries %}
+
+                                            <div class="col-md-4">
+                                                <div class="card card-plain card-blog m-0">
+                                                    <a href="{{ block.url }}">
+                                                        <div class="card-header card-header-image">
+                                                            <img class="img img-raised" src='{{ block.image.one.url }}'>
+                                                            <div class="colored-shadow"
+                                                                 style="background-image: url('{{ block.image.one.url }}'); opacity: 1;"></div>
+                                                        </div>
+                                                    </a>
+
+                                                    <div class="card-body">
+                                                        <h6 class="card-category {{ category.title == '行业新闻'?'text-info':'text-success' }}">{{ category.title }}</h6>
+                                                        <h4 class="card-title">
+                                                            <a href="{{ block.url }}">{{ block.title }}</a>
+                                                        </h4>
+                                                        <p class="card-description">
+                                                            {{ block.description }}
+                                                            <a href="{{ block.url }}"> 阅读更多 </a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <nav aria-label="...">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item {{ pageInfo.prevUrl? '':'disabled' }}">
+                                                <a class="page-link" href="{{ pageInfo.prevUrl }}?{{ category.slug }}" tabindex="-1">前页</a>
+                                            </li>
+                                            {% for page, url in pageInfo.getPrevUrls(5) %}
+                                                <li class="page-item"><a class="page-link"
+                                                                         href="{{ url }}?{{ category.slug }}">{{ page }}</a>
+                                                </li>
+                                            {% endfor %}
+                                            <li class="page-item active">
+                                                <a class="page-link" href="#">{{ pageInfo.currentPage }} <span
+                                                            class="sr-only">(current)</span></a>
+                                            </li>
+                                            {% for page, url in pageInfo.getNextUrls(5) %}
+                                                <li class="page-item"><a class="page-link"
+                                                                         href="{{ url }}?{{ category.slug }}">{{ page }}</a>
+                                                </li>
+                                            {% endfor %}
+                                            <li class="page-item {{ pageInfo.nextUrl? '':'disabled' }}">
+                                                <a class="page-link" href="{{ pageInfo.nextUrl }}?{{ category.slug }}">后页</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        {% if craft.app.language == 'zh' %}
+            {% include "_contact_cn" %}
+        {% endif %}
+    </div>
 {% endblock %}

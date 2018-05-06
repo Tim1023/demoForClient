@@ -109,30 +109,33 @@
                     <div class="col-md-10 ml-auto mr-auto">
                         <div class="row">
                             {% for block in craft.entries.section('news').all() %}
-                                <div class="col-md-4">
-                                    <div class="card card-plain card-blog">
-                                        <div class="card-header card-header-image">
+                                {% if block.isFeature %}
+                                    <div class="col-md-4">
+                                        <div class="card card-plain card-blog">
                                             <a href="{{ block.url }}">
-                                                <img class="img img-raised"
-                                                     src="{{ block.image.one.url }}">
+                                                <div class="card-header card-header-image">
+                                                    <img class="img img-raised" src='{{ block.image.one.url }}'>
+                                                    <div class="colored-shadow"
+                                                         style="background-image: url('{{ block.image.one.url }}'); opacity: 1;"></div>
+                                                </div>
                                             </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <h6 class="card-category {{ loop.index == 1?'text-info':loop.index == 2?'text-success':'text-danger' }}">
-                                                <i
-                                                        class="material-icons">{{ loop.index == 2?'business_center':'trending_up' }}</i>
-                                                {{ block.category.one }}
-                                            </h6>
-                                            <h4 class="card-title">
-                                                <a href="{{ block.url }}">{{ block.title }}</a>
-                                            </h4>
-                                            <p class="card-description">
-                                                {{ block.description }}
-                                                <a href="{{ block.url }}"> Read More </a>
-                                            </p>
+                                            <div class="card-body">
+                                                <h6 class="card-category {{ loop.index == 1?'text-info':loop.index == 2?'text-success':'text-danger' }}">
+                                                    <i
+                                                            class="material-icons">{{ loop.index == 2?'business_center':'trending_up' }}</i>
+                                                    {{ block.category.one }}
+                                                </h6>
+                                                <h4 class="card-title">
+                                                    <a href="{{ block.url }}">{{ block.title }}</a>
+                                                </h4>
+                                                <p class="card-description">
+                                                    {{ block.description }}
+                                                    <a href="{{ block.url }}"> Read More </a>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                {% endif %}
                             {% endfor %}
 
                         </div>
@@ -144,20 +147,20 @@
 
         {#CONTACT#}
         {#{% macro errorList(errors) %}#}
-            {#{% if errors %}#}
-                {#<ul class="errors">#}
-                    {#{% for error in errors %}#}
-                        {#<li>{{ error }}</li>#}
-                    {#{% endfor %}#}
-                {#</ul>#}
-            {#{% endif %}#}
+        {#{% if errors %}#}
+        {#<ul class="errors">#}
+        {#{% for error in errors %}#}
+        {#<li>{{ error }}</li>#}
+        {#{% endfor %}#}
+        {#</ul>#}
+        {#{% endif %}#}
         {#{% endmacro %}#}
 
         {#{% from _self import errorList %}#}
         {#{% if craft.app.session.hasFlash('notice') %}#}
-            {#<p class="message notice">{{ craft.app.session.getFlash('notice') }}</p>#}
+        {#<p class="message notice">{{ craft.app.session.getFlash('notice') }}</p>#}
         {#{% elseif craft.app.session.hasFlash('error') %}#}
-            {#<p class="message error">{{ craft.app.session.getFlash('error') }}</p>#}
+        {#<p class="message error">{{ craft.app.session.getFlash('error') }}</p>#}
         {#{% endif %}#}
 
         {% if craft.app.language == 'en' %}
@@ -168,25 +171,25 @@
 
 
     {#<form method="post" action="" accept-charset="UTF-8">#}
-        {#{{ csrfInput() }}#}
-        {#<input type="hidden" name="action" value="contact-form/send">#}
+    {#{{ csrfInput() }}#}
+    {#<input type="hidden" name="action" value="contact-form/send">#}
 
-        {#<h3><label for="from-name">Your Name</label></h3>#}
-        {#<input id="from-name" type="text" name="fromName" value="{{ message.fromName ?? '' }}">#}
-        {#{{ message is defined and message ? errorList(message.getErrors('fromName')) }}#}
+    {#<h3><label for="from-name">Your Name</label></h3>#}
+    {#<input id="from-name" type="text" name="fromName" value="{{ message.fromName ?? '' }}">#}
+    {#{{ message is defined and message ? errorList(message.getErrors('fromName')) }}#}
 
-        {#<h3><label for="from-email">Your Email</label></h3>#}
-        {#<input id="from-email" type="email" name="fromEmail" value="{{ message.fromEmail ?? '' }}">#}
-        {#{{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}#}
+    {#<h3><label for="from-email">Your Email</label></h3>#}
+    {#<input id="from-email" type="email" name="fromEmail" value="{{ message.fromEmail ?? '' }}">#}
+    {#{{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}#}
 
-        {#<h3><label for="subject">Subject</label></h3>#}
-        {#<input id="subject" type="text" name="subject" value="{{ message.subject ?? '' }}">#}
-        {#{{ message is defined and message ? errorList(message.getErrors('subject')) }}#}
+    {#<h3><label for="subject">Subject</label></h3>#}
+    {#<input id="subject" type="text" name="subject" value="{{ message.subject ?? '' }}">#}
+    {#{{ message is defined and message ? errorList(message.getErrors('subject')) }}#}
 
-        {#<h3><label for="message">Message</label></h3>#}
-        {#<textarea rows="10" cols="40" id="message" name="message">{{ message.message ?? '' }}</textarea>#}
-        {#{{ message is defined and message ? errorList(message.getErrors('message')) }}#}
+    {#<h3><label for="message">Message</label></h3>#}
+    {#<textarea rows="10" cols="40" id="message" name="message">{{ message.message ?? '' }}</textarea>#}
+    {#{{ message is defined and message ? errorList(message.getErrors('message')) }}#}
 
-        {#<input type="submit" value="Send">#}
+    {#<input type="submit" value="Send">#}
     {#</form>#}
 {% endblock %}

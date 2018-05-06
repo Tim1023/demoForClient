@@ -166,7 +166,7 @@
     color: #555;
 }
 
-.nav-pills .nav-item .nav-link {
+.nav.nav-pills.nav-pills-rose.flex-column .nav-item .nav-link {
     font-size: 1.188rem;
 }
 
@@ -315,4 +315,16 @@ p {
 }
 .nav-pills .nav-item .nav-link:hover{
     background-color: #a1ad5c;
+}
+
+
+.news-nav{
+    width: fit-content;
+    margin-bottom: 30px;
+}
+.news-nav.nav-pills .nav-item .nav-link{
+    font-size: 14px;
+}
+.card .card-header.card-header-image img{
+    height: 210px;
 }
