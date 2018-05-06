@@ -304,13 +304,13 @@ p {
     margin-bottom: 30px;
 }
 
-.tab-pane blockquote p {
+blockquote p {
     padding: 10px 20px;
     margin: 0 0 20px;
     border-left: 5px solid #eee;
     font-style: italic;
 }
-.tab-pane blockquote p:before,.tab-pane blockquote p:after{
+blockquote p:before,.tab-pane blockquote p:after{
     content: '"';
 }
 .nav-pills .nav-item .nav-link:hover{
