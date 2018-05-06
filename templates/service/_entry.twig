@@ -1,4 +1,60 @@
 {% extends "_layout" %} {% block main %}
-    {{ entry.title ?? "" }}
+    <!--   MAIN block   -->
+    <div class="page-header header-filter header-small" data-parallax="true"
+         style="background-image: url('{{ entry.image.one.url }}'); transform: translate3d(0px, 0px, 0px);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h1 class="title">{{ entry.title }}</h1>
+                    <h4>{{ entry.area }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main main-raised ">
+        <div class="container post ">
+            <div class="post-description text-center">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <h5 class="description">
+                            {{ entry.descriptionSingle }}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 ml-auto mr-auto text-center">
+                <h2 class="title">{{ entry.secondaryTitle }}</h2>
+            </div>
+            {% if  entry.tabs %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <ul class="nav nav-pills nav-pills-rose flex-column">
+                            {% for block in entry.tabs.all() %}
 
+                                <li class="nav-item">
+                                    <a class="nav-link {{ loop.index == 1? 'active':'' }}" href="#tab{{ loop.index }}"
+                                       data-toggle="tab">{{ block.head }}</a>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content">
+                            {% for block in entry.tabs.all() %}
+
+                                <div class="tab-pane {{ loop.index == 1? 'active':'' }}" id="tab{{ loop.index }}">
+                                    {{ block.info }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        {% if craft.app.language == 'en' %}
+            {% include "_contact_en" %}
+        {% endif %}
+    </div>
 {% endblock %}

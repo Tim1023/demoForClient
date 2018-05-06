@@ -173,7 +173,9 @@
     });
 </script>
 <script src="/js/bootstrap-4-navbar.js"></script>
+{% if siteUrl == url(craft.request.path) %}
 <script src="/js/all.js"></script>
+{% endif %}
 
 <script type="text/javascript">window.$crisp = [];
     window.CRISP_WEBSITE_ID = "afa207bc-524d-47de-99d0-fe6dc153bacb";
